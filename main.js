@@ -19,7 +19,7 @@
  * 請按 Ctrl + F5（或 Shift + 重新整理）強制重載，
  * 並確認畫面右下角頁尾與 F12 主控台顯示的版本號與此處一致。
  */
-const APP_VERSION = 'v1.5.0';
+const APP_VERSION = 'v1.6.0';
 
 /* ============================================================================
    ① API 設定區 ★★★ 只要改這一段 ★★★
@@ -1574,8 +1574,51 @@ function isTapFlipDevice() {
          window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+/* ------------------------------ 主題管理 -------------------------------- */
+const THEME_STORAGE_KEY = 'justin-ai-theme';
+
+function getStoredTheme() {
+  try {
+    return localStorage.getItem(THEME_STORAGE_KEY) || 'dark';
+  } catch (e) {
+    return 'dark';
+  }
+}
+
+function setTheme(theme, save) {
+  const isDark = theme === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  if (el.themeIcon) el.themeIcon.textContent = isDark ? '🌙' : '☀️';
+  if (el.themeToggleText) el.themeToggleText.textContent = isDark ? '暗色系' : '亮色系';
+  if (el.themeToggle) {
+    el.themeToggle.setAttribute('title', isDark ? '目前為暗色系（點擊切換為亮色）' : '目前為亮色系（點擊切換為暗色）');
+  }
+  if (save) {
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch (e) {}
+  }
+}
+
+function initTheme() {
+  const currentTheme = getStoredTheme();
+  setTheme(currentTheme, false);
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  setTheme(newTheme, true);
+  showToast(newTheme === 'dark' ? '已切換為深邃暗色系 🌙' : '已切換為明亮彩墨系 ☀️', 'info');
+}
+
 /* ------------------------------ 事件綁定 -------------------------------- */
 function bindEvents() {
+
+  /* 主題切換按鈕 */
+  if (el.themeToggle) {
+    el.themeToggle.addEventListener('click', toggleTheme);
+  }
 
   /* 管理員模式切換 */
   el.adminToggle.addEventListener('click', toggleAdminMode);
@@ -1736,6 +1779,7 @@ function bindEvents() {
 function cacheDom() {
   [
     'adminToggle','adminToggleText','adminPanel','modeBadge','courseForm','addCourseBtn',
+    'themeToggle','themeIcon','themeToggleText',
     'fName','fCategory','fPrice','fImage','fDesc','fSeats','categoryList',
     'returnOrderId','returnBtn','orderList',
     'courseGrid','emptyState','countChip','categoryBar','searchInput',
@@ -1755,6 +1799,7 @@ function init() {
     return;
   }
   cacheDom();
+  initTheme();
   state.discounts = loadDiscounts();   // 還原先前翻牌鎖定的折數
   bindEvents();
   loadCourses();
