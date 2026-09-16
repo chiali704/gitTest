@@ -19,7 +19,7 @@
  * 請按 Ctrl + F5（或 Shift + 重新整理）強制重載，
  * 並確認畫面右下角頁尾與 F12 主控台顯示的版本號與此處一致。
  */
-const APP_VERSION = 'v1.4.1';
+const APP_VERSION = 'v1.5.0';
 
 /* ============================================================================
    ① API 設定區 ★★★ 只要改這一段 ★★★
@@ -752,6 +752,7 @@ function courseCardHtml(course, index) {
   const soldout = course.remaining <= 0;
   const percent = Math.max(0, Math.min(100, (course.remaining / COURSE_CAPACITY) * 100));
   const img = course.imageUrl ? escapeHtml(course.imageUrl) : placeholderSvg(course.name);
+  const scrollNo = String((index !== undefined ? index : 0) + 1).padStart(2, '0');
 
   // 翻牌特價：已翻過的卡片沿用鎖定折數；尚未翻牌則顯示「翻牌有特價」
   const discount = getDiscount(course.id);
@@ -763,7 +764,7 @@ function courseCardHtml(course, index) {
     : '<svg viewBox="0 0 24 24" class="ico"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.5"/><path d="M21 20v-2a4 4 0 0 0-3-3.9"/></svg>';
 
   return '' +
-  '<article class="course-card" data-id="' + escapeHtml(course.id) + '" style="animation-delay:' + (index * 55) + 'ms">' +
+  '<article class="course-card" data-id="' + escapeHtml(course.id) + '" style="animation-delay:' + ((index || 0) * 55) + 'ms">' +
 
     // 刪除按鈕（管理員模式才顯示，位於翻轉層之外，正反面皆可點）
     '<button type="button" class="card-delete" data-action="delete-course" ' +
@@ -794,10 +795,15 @@ function courseCardHtml(course, index) {
         '<div class="card-imgbox">' +
           '<img src="' + img + '" alt="' + escapeHtml(course.name) + '" loading="lazy" ' +
                'onerror="JustinAI.onImgError(this)" data-title="' + escapeHtml(course.name) + '" />' +
+          '<span class="card-chapter">✦ 卷軸 ' + scrollNo + '</span>' +
           '<span class="card-ribbon">' + escapeHtml(course.category) + '</span>' +
           '<span class="card-serial">NO. ' + escapeHtml(course.id) + '</span>' +
         '</div>' +
         '<div class="card-front-body">' +
+          '<div class="card-meta-line">' +
+            '<span class="card-tag-pill">實戰修煉</span>' +
+            '<span class="card-est-time">⏱ 約 3hr 即戰力</span>' +
+          '</div>' +
           '<h3 class="card-name">' + escapeHtml(course.name) + '</h3>' +
           '<div class="card-front-foot">' +
             // 正面固定顯示定價，不揭露折扣
@@ -811,7 +817,10 @@ function courseCardHtml(course, index) {
 
       /* ---------- 背面 ---------- */
       '<div class="card-face card-back">' +
-        '<span class="back-cat">' + escapeHtml(course.category) + '</span>' +
+        '<div class="back-head-row">' +
+          '<span class="back-cat">' + escapeHtml(course.category) + '</span>' +
+          '<span class="back-quest">📜 卷軸成果</span>' +
+        '</div>' +
         '<h3 class="back-name">' + escapeHtml(course.name) + '</h3>' +
         '<div class="back-divider"></div>' +
         '<p class="back-desc">' + escapeHtml(course.description) + '</p>' +
@@ -833,7 +842,7 @@ function courseCardHtml(course, index) {
           '<button type="button" class="add-btn" data-action="add-to-cart"' + (soldout ? ' disabled' : '') + '>' +
             (soldout
               ? '名額已滿'
-              : '加入課程　<span class="btn-price">' + formatCurrency(finalPrice) + '</span>') +
+              : '收入學習行囊　<span class="btn-price">' + formatCurrency(finalPrice) + '</span>') +
           '</button>' +
         '</div>' +
       '</div>' +
@@ -850,7 +859,7 @@ const FLIP_HINT_HTML =
   '<svg viewBox="0 0 24 24" class="ico">' +
     '<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/>' +
     '<path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>' +
-  '</svg>翻牌有驚喜';
+  '</svg>翻牌解鎖折扣';
 
 /**
  * 翻牌瞬間揭曉折扣：第一次翻牌抽籤並鎖定，之後沿用同一折數。
@@ -1155,15 +1164,15 @@ function handleAddToCart(courseId, buttonEl) {
   if (buttonEl) {
     const original = buttonEl.textContent;
     buttonEl.classList.add('is-added');
-    buttonEl.textContent = '已加入選課車 ✓';
+    buttonEl.textContent = '已收入行囊 ✓';
     setTimeout(function () {
       buttonEl.classList.remove('is-added');
       buttonEl.textContent = original;
     }, 1000);
   }
   showToast(discount < 100
-    ? '已將「' + course.name + '」以 ' + discount + ' 折加入選課車。'
-    : '已將「' + course.name + '」加入選課車。', 'success');
+    ? '已將「' + course.name + '」以 ' + discount + ' 折收入學習行囊。'
+    : '已將「' + course.name + '」收入學習行囊。', 'success');
 }
 
 /** 調整數量 */
@@ -1628,11 +1637,50 @@ function bindEvents() {
       .forEach(function (c) { c.classList.remove('is-flipped'); });
   });
 
+  /* 輔助函式：同步角色導引卡的啟動狀態 */
+  function syncPersonaCards(cat) {
+    const cards = document.querySelectorAll('.persona-card');
+    cards.forEach(function (card) {
+      const cardCat = card.getAttribute('data-category');
+      if (cardCat === cat || (cat === '全部' && card.getAttribute('data-role') === 'all')) {
+        card.classList.add('is-active');
+      } else {
+        card.classList.remove('is-active');
+      }
+    });
+  }
+
+  /* 角色命運指南：點擊角色卡即切換對應分類並平滑滾動至牌組 */
+  const personaGrid = $('personaGrid');
+  if (personaGrid) {
+    personaGrid.addEventListener('click', function (e) {
+      const btn = e.target.closest('.persona-card');
+      if (!btn) return;
+
+      const targetCat = btn.getAttribute('data-category') || '全部';
+      const roleName = btn.querySelector('strong') ? btn.querySelector('strong').textContent : targetCat;
+      state.activeCategory = targetCat;
+
+      syncPersonaCards(targetCat);
+      renderCategories();
+      renderCourses();
+
+      const stage = $('deckStage') || el.courseGrid;
+      if (stage) {
+        stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      showToast('已為你對焦「' + roleName + '」實戰修煉卷軸！', 'info');
+    });
+  }
+
   /* 分類篩選 */
   el.categoryBar.addEventListener('click', function (e) {
     const chip = e.target.closest('.cat-chip');
     if (!chip) return;
-    state.activeCategory = chip.getAttribute('data-cat');
+    const cat = chip.getAttribute('data-cat') || '全部';
+    state.activeCategory = cat;
+    syncPersonaCards(cat);
     renderCategories();
     renderCourses();
   });

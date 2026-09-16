@@ -870,12 +870,34 @@ body.admin-on .btn-admin {
   color: rgba(255,255,255,.92);
   text-shadow: 0 1px 4px rgba(0,0,0,.5);
 }
+/* 卷軸序號標章（右上） */
+.card-chapter {
+  position: absolute; right: 10px; top: 12px; z-index: 2;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  color: #fff; background: rgba(13, 43, 69, 0.82);
+  backdrop-filter: blur(6px);
+  padding: 3px 9px; border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
 
 .card-front-body {
   flex: 1;
   display: flex; flex-direction: column; justify-content: space-between;
   padding: 16px 18px 18px;
   position: relative; z-index: 1;
+}
+.card-meta-line {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.card-tag-pill {
+  font-size: 11px; font-weight: 600;
+  color: var(--ink-700); background: var(--ink-050);
+  border: 1px solid var(--ink-200);
+  padding: 1px 7px; border-radius: 4px;
+}
+.card-est-time {
+  font-size: 11.5px; color: var(--text-muted);
 }
 .card-name {
   font-family: var(--font-display);
@@ -928,9 +950,20 @@ body.admin-on .btn-admin {
     repeating-linear-gradient(-45deg, rgba(125,91,166,.06) 0 2px, transparent 2px 12px);
   pointer-events: none;
 }
+.back-head-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  position: relative; z-index: 1;
+}
 .back-cat {
   font-size: 11.5px; font-weight: 700; letter-spacing: .08em;
   color: var(--plum);
+  position: relative; z-index: 1;
+}
+.back-quest {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  color: var(--gold); background: rgba(201, 138, 46, 0.12);
+  border: 1px solid rgba(201, 138, 46, 0.28);
+  padding: 2px 8px; border-radius: 99px;
   position: relative; z-index: 1;
 }
 .back-name {
@@ -1743,6 +1776,562 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
   }
   .board-head { padding-top: 16px; }
   .cart-close { display: grid; }
+}
+
+
+/* ============================================================================
+   ⑯ 沉浸式敘事層：Hero、角色指南、導師手記、進化地圖、學員見證
+============================================================================ */
+
+/* ---------- Hero 序章 ---------- */
+.narrative-hero {
+  padding: 44px 0 24px;
+  position: relative;
+  z-index: 5;
+}
+.hero-content {
+  max-width: 960px;
+  margin-inline: auto;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(47, 127, 184, 0.32);
+  border-radius: 99px;
+  box-shadow: 0 4px 14px rgba(13, 43, 69, 0.06);
+  backdrop-filter: blur(8px);
+  margin-bottom: 20px;
+}
+.badge-spark {
+  color: var(--gold);
+  font-size: 13px;
+  animation: sparkPulse 2.5s ease-in-out infinite;
+}
+@keyframes sparkPulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.3); opacity: 1; filter: drop-shadow(0 0 6px rgba(201, 138, 46, 0.6)); }
+}
+.badge-text {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-700);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5.2vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+  margin-bottom: 18px;
+}
+.title-shimmer {
+  background: linear-gradient(135deg, var(--ink-900) 0%, var(--ink-500) 50%, var(--sky) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.hero-desc {
+  max-width: 760px;
+  margin-inline: auto;
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+.hero-desc strong {
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+/* --- 角色命運指南 (Persona Pathway) --- */
+.persona-section {
+  margin-top: 36px;
+}
+.persona-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.persona-guide-label {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink-800);
+  letter-spacing: 0.02em;
+}
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.persona-card {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px 12px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: transform var(--dur-base) var(--ease),
+              border-color var(--dur-base) var(--ease),
+              box-shadow var(--dur-base) var(--ease),
+              background var(--dur-base) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.persona-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(47, 127, 184, 0.12), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease);
+  pointer-events: none;
+}
+.persona-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--ink-400);
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(13, 43, 69, 0.1);
+}
+.persona-card:hover::after {
+  opacity: 1;
+}
+.persona-card.is-active {
+  background: linear-gradient(150deg, #ffffff 0%, var(--ink-050) 100%);
+  border-color: var(--ink-500);
+  box-shadow: 0 8px 24px rgba(47, 127, 184, 0.22), 0 0 0 1.5px var(--ink-500);
+  transform: translateY(-2px);
+}
+.persona-icon {
+  font-size: 24px;
+  line-height: 1;
+  flex: none;
+}
+.persona-meta {
+  flex: 1;
+  min-width: 0;
+}
+.persona-meta strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink-900);
+  white-space: nowrap;
+}
+.persona-meta small {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.persona-card.is-active .persona-meta strong {
+  color: var(--ink-500);
+}
+
+/* --- 核心亮點微徽章 --- */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 32px;
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(23, 73, 111, 0.1);
+  border-radius: 99px;
+  backdrop-filter: blur(8px);
+  width: fit-content;
+  margin-inline: auto;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--gold);
+  line-height: 1.2;
+}
+.stat-label {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+.stat-div {
+  width: 1px;
+  height: 24px;
+  background: var(--line);
+}
+
+/* ---------- 導師手記與進化四部曲 ---------- */
+.hero-narrative-cards {
+  display: grid;
+  grid-template-columns: 1.15fr 1.35fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+/* 導師手記 */
+.mentor-codex {
+  position: relative;
+  background: linear-gradient(145deg, #fffefb 0%, #fbf6ec 100%);
+  border: 1.5px solid rgba(201, 138, 46, 0.38);
+  border-radius: var(--radius-lg);
+  padding: 26px 28px;
+  box-shadow: 0 12px 36px rgba(201, 138, 46, 0.08), 0 2px 8px rgba(13, 43, 69, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.mentor-codex::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(201, 138, 46, 0.28);
+  border-radius: calc(var(--radius-lg) - 6px);
+  pointer-events: none;
+}
+.codex-seal-mark {
+  position: absolute;
+  right: -10px;
+  bottom: -22px;
+  font-family: var(--font-display);
+  font-size: 8rem;
+  font-weight: 900;
+  color: rgba(201, 138, 46, 0.06);
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+.codex-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+.codex-tag {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+.codex-date {
+  font-family: var(--font-script);
+  font-size: 18px;
+  color: var(--text-muted);
+}
+.codex-quote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  line-height: 1.82;
+  color: var(--ink-900);
+  font-style: normal;
+  position: relative;
+  z-index: 1;
+}
+.codex-quote strong {
+  color: #784c0c;
+  border-bottom: 1.5px solid rgba(201, 138, 46, 0.4);
+}
+.codex-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  border-top: 1px dashed rgba(201, 138, 46, 0.25);
+  padding-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+.codex-author {
+  font-family: var(--font-script);
+  font-size: 20px;
+  color: var(--ink-800);
+  font-weight: 700;
+}
+.codex-stamp {
+  font-size: 11px;
+  padding: 3px 10px;
+  background: rgba(201, 138, 46, 0.12);
+  border: 1px solid rgba(201, 138, 46, 0.25);
+  border-radius: 99px;
+  color: #8c5b14;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* 商業進化 4 步曲 */
+.evolution-track {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.track-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink-900);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.track-spark {
+  color: var(--gold);
+}
+.track-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.track-step {
+  flex: 1;
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 10px;
+  text-align: center;
+  transition: transform var(--dur-base) var(--ease),
+              border-color var(--dur-base) var(--ease),
+              box-shadow var(--dur-base) var(--ease);
+}
+.track-step:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink-400);
+  box-shadow: var(--shadow-sm);
+}
+.step-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--ink-500);
+  background: var(--ink-050);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+.track-step strong {
+  display: block;
+  font-size: 13.5px;
+  color: var(--ink-900);
+  font-weight: 700;
+}
+.track-step small {
+  display: block;
+  font-size: 11px;
+  color: var(--text-soft);
+  line-height: 1.35;
+  margin-top: 3px;
+}
+.track-arrow {
+  color: var(--ink-300);
+  font-weight: 700;
+  font-size: 15px;
+  flex: none;
+}
+.step--highlight {
+  border-color: rgba(47, 127, 184, 0.45);
+  background: linear-gradient(160deg, #ffffff 0%, var(--ink-050) 100%);
+  box-shadow: 0 6px 18px rgba(47, 127, 184, 0.14);
+}
+.step--highlight .step-badge {
+  background: var(--ink-500);
+  color: #ffffff;
+}
+
+/* ---------- 學員實戰蛻變見證 (Chronicles of Triumph) ---------- */
+.testimonials-section {
+  padding: 70px 0 30px;
+  position: relative;
+  z-index: 5;
+}
+.section-badge-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.testi-title {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 900;
+  color: var(--ink-900);
+  margin-bottom: 8px;
+}
+.testi-sub {
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 15.5px;
+  margin-bottom: 36px;
+}
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.story-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur-base) var(--ease),
+              border-color var(--dur-base) var(--ease),
+              box-shadow var(--dur-base) var(--ease);
+}
+.story-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ink-400);
+  box-shadow: var(--shadow-lg);
+}
+.story-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.story-avatar {
+  font-size: 26px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--paper-soft);
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  flex: none;
+}
+.story-author strong {
+  display: block;
+  font-size: 15px;
+  color: var(--ink-900);
+}
+.story-author small {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.story-pill {
+  margin-left: auto;
+  font-size: 11px;
+  background: var(--ink-050);
+  color: var(--ink-700);
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-weight: 600;
+  border: 1px solid var(--ink-200);
+}
+.story-quote {
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 22px;
+  flex: 1;
+}
+.story-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.story-metric {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--jade-d);
+  background: rgba(47, 158, 143, 0.12);
+  border: 1px solid rgba(47, 158, 143, 0.28);
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+.story-tag {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ---------- 響應式適配 ---------- */
+@media (max-width: 1100px) {
+  .persona-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .hero-narrative-cards {
+    grid-template-columns: 1fr;
+  }
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .narrative-hero {
+    padding: 28px 0 16px;
+  }
+  .hero-stats {
+    gap: 16px;
+    border-radius: var(--radius-md);
+    flex-wrap: wrap;
+  }
+  .persona-grid {
+    grid-template-columns: 1fr;
+  }
+  .track-steps {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .track-arrow {
+    transform: rotate(90deg);
+  }
+  .testimonials-section {
+    padding: 40px 0 10px;
+  }
 }
 
 

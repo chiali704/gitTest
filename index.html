@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>賈斯汀的 AI 商業應用shop5.1</title>
-    <meta name="description" content="賈斯汀 AI 課程商業應用網站：桌遊風格選課卡、即時選課車、管理員課程維護。" />
+    <title>賈斯汀 AI 課程 ─ 商業實戰學院</title>
+    <meta name="description" content="賈斯汀 AI 課程商業應用網站：以 AI 為筆，重寫商業可能。桌遊風格翻牌卡、即時選課車、沉浸式實戰學院。" />
 
     <!-- 字體：思源黑體（介面）＋ JetBrains Mono（終端機指令感） -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +17,7 @@
         rel="stylesheet" />
 
     <!-- ?v= 版本號：改版後更新此數字，可強制瀏覽器重新下載，不會吃到舊快取 -->
-    <link rel="stylesheet" href="style.css?v=1.4.1" />
+    <link rel="stylesheet" href="style.css?v=1.5.0" />
 </head>
 
 <body>
@@ -214,10 +214,151 @@
 
 
     <!-- ============================================================
+     【世界觀與序章】Hero 敘事區塊
+     沉浸式學院定位：引導探索者從角色出發，開啟商業智能的修煉旅程
+============================================================ -->
+    <section class="narrative-hero wrap" aria-labelledby="heroTitle">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-spark">✦</span>
+                <span class="badge-text">Justin AI Academy ・ 商業實戰學院</span>
+                <span class="badge-spark">✦</span>
+            </div>
+            <h1 id="heroTitle" class="hero-title">
+                以 AI 為筆，<br class="mobile-break" /><span class="title-shimmer">重寫你的商業邊界</span>
+            </h1>
+            <p class="hero-desc">
+                不背冰冷代碼，不學脫節理論。賈斯汀學院將第一線商業實戰，煉成一張張即翻即戰的<strong>命運牌組</strong>。
+                翻開屬於你的啟發卷軸，解鎖下一章職業躍升。
+            </p>
+
+            <!-- 角色命運指南（Persona Pathway） -->
+            <div class="persona-section">
+                <div class="persona-head">
+                    <span class="persona-guide-label">🧭 選擇你的探索角色・對焦專屬修煉路徑：</span>
+                </div>
+                <div class="persona-grid" id="personaGrid" role="tablist" aria-label="角色路徑選擇">
+                    <button type="button" class="persona-card is-active" data-role="all" data-category="全部">
+                        <div class="persona-icon">🌌</div>
+                        <div class="persona-meta">
+                            <strong>全域探索者</strong>
+                            <small>瀏覽所有 10 門實戰卷軸</small>
+                        </div>
+                    </button>
+                    <button type="button" class="persona-card" data-role="efficiency" data-category="職場應用">
+                        <div class="persona-icon">⚡</div>
+                        <div class="persona-meta">
+                            <strong>效率躍升者</strong>
+                            <small>消滅繁瑣日常・提早 2 小時下班</small>
+                        </div>
+                    </button>
+                    <button type="button" class="persona-card" data-role="creative" data-category="視覺設計">
+                        <div class="persona-icon">🎨</div>
+                        <div class="persona-meta">
+                            <strong>視覺鍊金師</strong>
+                            <small>調配精準詠唱・秒出高階商用圖</small>
+                        </div>
+                    </button>
+                    <button type="button" class="persona-card" data-role="analytics" data-category="商業分析">
+                        <div class="persona-icon">📈</div>
+                        <div class="persona-meta">
+                            <strong>數據洞察家</strong>
+                            <small>讓數據開口說話・預測營收商機</small>
+                        </div>
+                    </button>
+                    <button type="button" class="persona-card" data-role="architect" data-category="技術實作">
+                        <div class="persona-icon">🤖</div>
+                        <div class="persona-meta">
+                            <strong>智能體架構師</strong>
+                            <small>打造不眠不休的 AI 數位特工</small>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 核心亮點微徽章 -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-num">100%</span>
+                    <span class="stat-label">實戰案例導向</span>
+                </div>
+                <div class="stat-div"></div>
+                <div class="stat-item">
+                    <span class="stat-num">75~99 折</span>
+                    <span class="stat-label">翻牌隨機結緣</span>
+                </div>
+                <div class="stat-div"></div>
+                <div class="stat-item">
+                    <span class="stat-num">50 名</span>
+                    <span class="stat-label">小班上限名額</span>
+                </div>
+                <div class="stat-div"></div>
+                <div class="stat-item">
+                    <span class="stat-num">即學即用</span>
+                    <span class="stat-label">工作模版直接套用</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 導師手記與進化四部曲 -->
+        <div class="hero-narrative-cards">
+            <!-- 導師手記 -->
+            <aside class="mentor-codex">
+                <div class="codex-seal-mark" aria-hidden="true">賈</div>
+                <div class="codex-header">
+                    <span class="codex-tag">📜 導師手記・賈斯汀的話</span>
+                    <span class="codex-date">Justin's Codex</span>
+                </div>
+                <blockquote class="codex-quote">
+                    「在 AI 大爆發的時代，最昂貴的不是算力，而是知道如何向 AI 提問的<strong>商業洞察視野</strong>。
+                    這不是枯燥的技術課，而是一套讓你以十倍速擴張商業戰力的智慧槓桿。」
+                </blockquote>
+                <div class="codex-footer">
+                    <span class="codex-author">學院創辦人 賈斯汀 筆</span>
+                    <span class="codex-stamp">驗證實戰・不尚空談</span>
+                </div>
+            </aside>
+
+            <!-- 商業進化 4 步曲 -->
+            <div class="evolution-track">
+                <div class="track-title">
+                    <span class="track-spark">✦</span> 商業進化 4 階修煉軌跡
+                </div>
+                <div class="track-steps">
+                    <div class="track-step">
+                        <span class="step-badge">Phase 01</span>
+                        <strong>認知啟蒙</strong>
+                        <small>打破思維框架，看清 AI 商業全景</small>
+                    </div>
+                    <div class="track-arrow" aria-hidden="true">→</div>
+                    <div class="track-step">
+                        <span class="step-badge">Phase 02</span>
+                        <strong>精準詠唱</strong>
+                        <small>提示工程，產出高轉化視覺與文案</small>
+                    </div>
+                    <div class="track-arrow" aria-hidden="true">→</div>
+                    <div class="track-step">
+                        <span class="step-badge">Phase 03</span>
+                        <strong>自動流程</strong>
+                        <small>串接無代碼 API，重塑日常營運</small>
+                    </div>
+                    <div class="track-arrow" aria-hidden="true">→</div>
+                    <div class="track-step step--highlight">
+                        <span class="step-badge">Phase 04</span>
+                        <strong>智能代理</strong>
+                        <small>架構自主 AI Agent，倍增商業產能</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
      ④ 主要內容：左側課程網格 + 右側選課車
 ============================================================ -->
     <!-- ---------- 頁面工具列：橫跨整個寬度，讓下方課程卡與選課車齊高 ---------- -->
-    <section class="board-head wrap" aria-labelledby="menuTitle">
+    <section class="board-head wrap" id="deckStage" aria-labelledby="menuTitle">
 
         <!-- 離線 / 錯誤提示列（預設隱藏） -->
         <div class="alert-bar" id="offlineBar" hidden>
@@ -230,8 +371,8 @@
 
         <div class="section-head">
             <h1 id="menuTitle" class="section-title">
-                <span class="title-ink">課程牌組</span>
-                <small>滑鼠移到卡片上即可翻牌，翻開就有專屬折扣</small>
+                <span class="title-ink">命運牌組 ✦ 商業實戰卷軸</span>
+                <small>滑鼠懸停即可翻開卷軸・首次翻開立即揭曉專屬命運特惠</small>
             </h1>
             <div class="section-tools">
                 <div class="search-box">
@@ -239,7 +380,7 @@
                         <circle cx="11" cy="11" r="7" />
                         <path d="m20 20-3.2-3.2" />
                     </svg>
-                    <input type="search" id="searchInput" placeholder="搜尋課程名稱或關鍵字…" aria-label="搜尋課程" />
+                    <input type="search" id="searchInput" placeholder="搜尋實戰卷軸名稱或關鍵字…" aria-label="搜尋課程" />
                 </div>
                 <span class="count-chip" id="countChip">共 0 門課程</span>
             </div>
@@ -282,7 +423,7 @@
                             <circle cx="10" cy="20" r="1.4" />
                             <circle cx="18" cy="20" r="1.4" />
                         </svg>
-                        我的選課車
+                        我的學習行囊
                     </h2>
                     <span class="cart-badge" id="cartBadge">0</span>
                     <button type="button" class="cart-close" id="cartClose" aria-label="關閉選課車">×</button>
@@ -299,13 +440,13 @@
                         <circle cx="86" cy="84" r="6" />
                         <path class="dash" d="M62 8 74 20 62 32 50 20z" />
                     </svg>
-                    <p>選課車還空著</p>
-                    <small>翻開左側卡片，把想學的課程加進來吧！</small>
+                    <p>學習行囊尚待啟程</p>
+                    <small>在左側翻開命運牌組，將為你賦能的實戰卷軸收入行囊吧！</small>
                 </div>
 
                 <!-- 金額結算 -->
                 <div class="cart-summary" id="cartSummary" hidden>
-                    <div class="sum-row"><span>課程數量</span><b id="sumCount">0 門</b></div>
+                    <div class="sum-row"><span>已選卷軸</span><b id="sumCount">0 門</b></div>
                     <div class="sum-row"><span>合計堂數</span><b id="sumQty">0 堂</b></div>
                     <div class="sum-row sum-row--total"><span>應付總金額</span><b id="sumTotal">NT$ 0</b></div>
                 </div>
@@ -313,19 +454,90 @@
                 <!-- 送出區 -->
                 <div class="cart-foot">
                     <div class="field">
-                        <label for="customerName">顧客姓名 <b>*</b></label>
-                        <input type="text" id="customerName" placeholder="請輸入報名人姓名" autocomplete="name" />
+                        <label for="customerName">探索者姓名 <b>*</b></label>
+                        <input type="text" id="customerName" placeholder="請輸入報名人或探索者姓名" autocomplete="name" />
                     </div>
                     <button type="button" class="btn btn-submit" id="submitOrderBtn">
                         <span class="btn-spinner" aria-hidden="true"></span>
-                        <span class="btn-label">確認送出選單</span>
+                        <span class="btn-label">確認送出修煉登記</span>
                     </button>
-                    <p class="cart-note">送出後將寫入 orders 工作表，並更新課程剩餘名額。</p>
+                    <p class="cart-note">送出後將為你鎖定席位與翻牌特惠，開啟商業躍遷之旅。</p>
                 </div>
 
             </div>
         </aside>
     </main>
+
+
+    <!-- ============================================================
+     【學員蛻變實錄】Chronicles of Triumph
+     真實成果反饋，強化決策說服力與故事共鳴
+============================================================ -->
+    <section class="testimonials-section wrap" aria-labelledby="testiHeading">
+        <div class="section-badge-center">
+            <span class="badge-spark">✦</span>
+            <span>學員實戰蛻變故事・CHRONICLES OF TRIUMPH</span>
+            <span class="badge-spark">✦</span>
+        </div>
+        <h2 id="testiHeading" class="testi-title">他們如何翻開牌組，重塑商業效率？</h2>
+        <p class="testi-sub">來自不同產業的探索者實戰反饋，見證 AI 如何真正落實到日常商業場景。</p>
+
+        <div class="story-grid">
+            <article class="story-card">
+                <div class="story-header">
+                    <span class="story-avatar">👩‍💼</span>
+                    <div class="story-author">
+                        <strong>Claire 林</strong>
+                        <small>跨境電商行銷總監</small>
+                    </div>
+                    <span class="story-pill">視覺設計 & 數位行銷</span>
+                </div>
+                <p class="story-quote">
+                    「以前做一檔檔期促銷，視覺團隊光是做多尺寸 Banner 就要來回對稿一整週。上完 Midjourney 與文案全攻略後，我們自己 30 分鐘就能產出 12 套高階提案，轉化率還提升了 35%！」
+                </p>
+                <div class="story-foot">
+                    <span class="story-metric">⚡ 視覺製作週期縮短 80%</span>
+                    <span class="story-tag">修煉牌組：AI-102 & AI-106</span>
+                </div>
+            </article>
+
+            <article class="story-card">
+                <div class="story-header">
+                    <span class="story-avatar">👨‍💻</span>
+                    <div class="story-author">
+                        <strong>David 郭</strong>
+                        <small>科技新創營運經理</small>
+                    </div>
+                    <span class="story-pill">流程自動化</span>
+                </div>
+                <p class="story-quote">
+                    「原本以為自動化一定要工程師寫代碼，但在無程式碼工作流課程裡，用 Make 和 n8n 兩天內就搭建好自動訂單通知與客訴派工系統，每週替團隊省下超過 18 小時的繁雜人工時間。」
+                </p>
+                <div class="story-foot">
+                    <span class="story-metric">⚡ 每週節省 18 小時人工</span>
+                    <span class="story-tag">修煉牌組：AI-104</span>
+                </div>
+            </article>
+
+            <article class="story-card">
+                <div class="story-header">
+                    <span class="story-avatar">🚀</span>
+                    <div class="story-author">
+                        <strong>Jason 葉</strong>
+                        <small>企業管理顧問 / 創辦人</small>
+                    </div>
+                    <span class="story-pill">技術實作 & AI Agent</span>
+                </div>
+                <p class="story-quote">
+                    「我們把企業內部 5 年積累的 SOP 全部餵入專屬 RAG 知識庫，新進顧問問問題秒獲解答；加上 AI Agent 自主拆解任務，公司接案容量直接放大三倍，真正做到了能力倍增！」
+                </p>
+                <div class="story-foot">
+                    <span class="story-metric">⚡ 團隊交付效率翻 3 倍</span>
+                    <span class="story-tag">修煉牌組：AI-105 & AI-110</span>
+                </div>
+            </article>
+        </div>
+    </section>
 
 
     <!-- 手機版：底部浮動選課車按鈕 -->
@@ -344,8 +556,8 @@
 ============================================================ -->
     <footer class="site-footer">
         <div class="wrap">
-            <p>賈斯汀 AI 課程商業應用學院　|　資料來源：Google 試算表（menu / orders）</p>
-            <p class="foot-sub">以 AI 為筆，把商業問題寫成解答。</p>
+            <p>賈斯汀 AI 課程商業應用學院 ✦ Justin AI Academy</p>
+            <p class="foot-sub">以 AI 為筆，把商業難題寫成優雅解答・願智慧與你的冒險同行</p>
             <p class="foot-version">前端版本 <span id="appVersion">—</span></p>
         </div>
     </footer>
@@ -415,7 +627,7 @@
     <!-- Toast 提示容器 -->
     <div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
-    <script src="main.js?v=1.4.1"></script>
+    <script src="main.js?v=1.5.0"></script>
 </body>
 
 </html>
