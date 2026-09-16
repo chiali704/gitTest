@@ -1346,10 +1346,14 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 .deal-line {
   display: flex; align-items: center; gap: 8px;
   padding: 7px 10px;
-  background: linear-gradient(120deg, rgba(255,243,214,.95), rgba(243,202,136,.6));
-  border: 1px solid rgba(201,138,46,.45);
+  background: linear-gradient(120deg, rgba(251, 191, 36, .18), rgba(217, 119, 6, .24));
+  border: 1px solid rgba(251, 191, 36, .45);
   border-radius: 99px;
   animation: dealIn .5s var(--ease-back);
+}
+[data-theme="light"] .deal-line {
+  background: linear-gradient(120deg, rgba(255,243,214,.95), rgba(243,202,136,.6));
+  border: 1px solid rgba(201,138,46,.45);
 }
 .deal-line.is-hidden { display: none; }
 .deal-badge {
@@ -1360,7 +1364,8 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
   box-shadow: 0 2px 6px rgba(201,138,46,.4);
   white-space: nowrap;
 }
-.deal-text { font-size: 12px; font-weight: 700; color: #7a5514; }
+.deal-text { font-size: 12px; font-weight: 700; color: #fde68a; }
+[data-theme="light"] .deal-text { color: #7a5514; }
 @keyframes dealIn {
   from { opacity: 0; transform: translateY(-8px) scale(.9); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
@@ -1401,20 +1406,28 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 .skeleton-card {
   aspect-ratio: 5 / 7;
   border-radius: var(--radius-lg);
-  border: 2px solid rgba(23,73,111,.16);
-  background: #fff;
+  border: 2px solid var(--line-strong);
+  background: var(--paper-card);
   overflow: hidden;
   display: flex; flex-direction: column;
   box-shadow: var(--shadow-sm);
+}
+[data-theme="light"] .skeleton-card {
+  border: 2px solid rgba(23,73,111,.16);
+  background: #fff;
 }
 .sk-img  { height: 52%; }
 .sk-body { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
 .sk-line { height: 12px; border-radius: 99px; }
 .sk-line--80 { width: 80%; } .sk-line--60 { width: 60%; } .sk-line--40 { width: 40%; margin-top: auto; height: 26px; }
 .sk-img, .sk-line {
-  background: linear-gradient(100deg, #e9f1f8 30%, #f7fbff 50%, #e9f1f8 70%);
+  background: linear-gradient(100deg, #1b263e 30%, #273656 50%, #1b263e 70%);
   background-size: 240% 100%;
   animation: shimmer 1.35s linear infinite;
+}
+[data-theme="light"] .sk-img,
+[data-theme="light"] .sk-line {
+  background: linear-gradient(100deg, #e9f1f8 30%, #f7fbff 50%, #e9f1f8 70%);
 }
 @keyframes shimmer {
   from { background-position: 140% 0; }
@@ -1444,12 +1457,16 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
   display: flex; flex-direction: column;
   height: calc(100vh - var(--header-h) - 44px);
   max-height: calc(100vh - var(--header-h) - 44px);
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(10px);
-  border: 1.5px solid var(--line);
+  background: var(--paper-glass);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid var(--line-strong);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
+}
+[data-theme="light"] .cart-card {
+  background: rgba(255,255,255,.92);
+  border: 1.5px solid var(--line);
 }
 /* 上緣彩墨飾帶 */
 .cart-card::before {
@@ -1508,7 +1525,7 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 }
 .ci-thumb {
   width: 52px; height: 52px; border-radius: var(--radius-sm);
-  object-fit: cover; border: 1.5px solid var(--line); background: var(--ink-050);
+  object-fit: cover; border: 1.5px solid var(--line-strong); background: var(--paper-soft);
 }
 .ci-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .ci-name {
@@ -1522,8 +1539,8 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 /* 數量調整器 */
 .qty {
   display: inline-flex; align-items: center; gap: 2px;
-  background: var(--ink-050);
-  border: 1px solid var(--ink-200);
+  background: var(--paper-soft);
+  border: 1px solid var(--line-strong);
   border-radius: 99px;
   padding: 2px;
 }
@@ -1531,14 +1548,14 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
   width: 24px; height: 24px;
   display: grid; place-items: center;
   font-size: 15px; font-weight: 700; line-height: 1;
-  color: var(--ink-700); background: #fff;
+  color: var(--text); background: var(--paper-card);
   border: 0; border-radius: 50%; cursor: pointer;
-  box-shadow: 0 1px 3px rgba(13,43,69,.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
   transition: all var(--dur-fast) var(--ease);
 }
 .qty button:hover  { background: var(--ink-500); color: #fff; transform: scale(1.1); }
 .qty button:active { transform: scale(.9); }
-.qty button:disabled { opacity: .4; cursor: not-allowed; transform: none; background: #fff; color: var(--text-muted); }
+.qty button:disabled { opacity: .4; cursor: not-allowed; transform: none; background: var(--paper-card); color: var(--text-muted); }
 .qty .qty-num {
   min-width: 30px; text-align: center;
   font-size: 13.5px; font-weight: 700; color: var(--ink-900);
@@ -1583,6 +1600,10 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 /* 金額結算 */
 .cart-summary {
   padding: 14px 20px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, .85), rgba(11, 16, 28, .98));
+  border-top: 1px solid var(--line-strong);
+}
+[data-theme="light"] .cart-summary {
   background: linear-gradient(180deg, var(--ink-050), rgba(234,244,251,.4));
   border-top: 1px solid var(--line);
 }
@@ -1609,9 +1630,13 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 
 .cart-foot {
   padding: 16px 20px 20px;
-  border-top: 1px solid var(--line);
-  background: rgba(255,255,255,.7);
+  border-top: 1px solid var(--line-strong);
+  background: rgba(15, 23, 42, .88);
   display: flex; flex-direction: column; gap: 12px;
+}
+[data-theme="light"] .cart-foot {
+  background: rgba(255,255,255,.7);
+  border-top: 1px solid var(--line);
 }
 .cart-note {
   font-family: var(--font-script);
@@ -1650,9 +1675,12 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 .busy-overlay {
   position: fixed; inset: 0; z-index: 200;
   display: grid; place-items: center;
-  background: rgba(233,242,250,.72);
-  backdrop-filter: blur(6px);
+  background: rgba(8, 13, 26, .85);
+  backdrop-filter: blur(8px);
   animation: fadeIn var(--dur-base) var(--ease);
+}
+[data-theme="light"] .busy-overlay {
+  background: rgba(233,242,250,.72);
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -1660,10 +1688,15 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
   width: min(320px, 86vw);
   padding: 34px 28px 26px;
   text-align: center;
-  background: #fff;
+  background: var(--paper-card);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   animation: popIn var(--dur-base) var(--ease-back);
+}
+[data-theme="light"] .busy-box {
+  background: #fff;
+  border: none;
 }
 @keyframes popIn {
   from { opacity: 0; transform: scale(.86) translateY(14px); }
@@ -1738,19 +1771,27 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 .modal { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; }
 .modal-mask {
   position: absolute; inset: 0;
-  background: rgba(13,43,69,.42);
-  backdrop-filter: blur(5px);
+  background: rgba(8, 13, 26, .78);
+  backdrop-filter: blur(8px);
   animation: fadeIn var(--dur-base) var(--ease);
+}
+[data-theme="light"] .modal-mask {
+  background: rgba(13,43,69,.42);
 }
 .modal-card {
   position: relative;
   width: min(400px, 88vw);
   padding: 34px 30px 28px;
   text-align: center;
-  background: #fff;
+  background: var(--paper-card);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   animation: modalIn var(--dur-slow) var(--ease-back);
+}
+[data-theme="light"] .modal-card {
+  background: #fff;
+  border: none;
 }
 @keyframes modalIn {
   from { opacity: 0; transform: translateY(28px) scale(.9); }
@@ -1793,8 +1834,8 @@ body.admin-on .card-delete { opacity: 1; transform: scale(1) rotate(0); pointer-
 .order-slip {
   display: flex; align-items: center; justify-content: space-between;
   padding: 10px 16px; margin-bottom: 18px;
-  background: var(--ink-050);
-  border: 1px dashed var(--ink-300);
+  background: var(--paper-soft);
+  border: 1px dashed var(--line-strong);
   border-radius: var(--radius-sm);
   font-size: 13px; color: var(--text-soft);
 }
