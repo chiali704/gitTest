@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="zh-Hant-TW" data-theme="dark">
 
 <head>
     <meta charset="UTF-8" />
@@ -17,7 +17,7 @@
         rel="stylesheet" />
 
     <!-- ?v= 版本號：改版後更新此數字，可強制瀏覽器重新下載，不會吃到舊快取 -->
-    <link rel="stylesheet" href="style.css?v=1.5.0" />
+    <link rel="stylesheet" href="style.css?v=1.6.0" />
 </head>
 
 <body>
@@ -98,6 +98,13 @@
 
             <div class="header-actions">
                 <span class="mode-badge" id="modeBadge">顧客模式</span>
+
+                <!-- 顏色主題切換按鈕（預設暗色系） -->
+                <button type="button" class="btn btn-theme" id="themeToggle" aria-label="切換顏色主題" title="切換暗色 / 亮色主題">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                    <span id="themeToggleText">暗色系</span>
+                </button>
+
                 <!-- 需求 3：最上方的管理員模式切換按鈕 -->
                 <button type="button" class="btn btn-admin" id="adminToggle" aria-expanded="false"
                     aria-controls="adminPanel">
@@ -627,7 +634,7 @@
     <!-- Toast 提示容器 -->
     <div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
-    <script src="main.js?v=1.5.0"></script>
+    <script src="main.js?v=1.6.0"></script>
 </body>
 
 </html>
